@@ -4,45 +4,47 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
  *
- * @package _s
+ * @package Tarsasnavigator_s
  */
 
 get_header(); ?>
 
-	<main id="primary" class="site-main">
-
-	<?php
-	if ( have_posts() ) : ?>
-
-		<header class="page-header">
-			<h1 class="page-title"><?php
-				/* translators: %s: search query. */
-				printf( esc_html__( 'Search Results for: %s', '_s' ), '<span>' . get_search_query() . '</span>' );
-			?></h1>
-		</header><!-- .page-header -->
+	<section id="primary" class="content-area">
+		<main id="main" class="site-main">
 
 		<?php
-		/* Start the Loop */
-		while ( have_posts() ) : the_post();
+		if ( have_posts() ) : ?>
 
-			/**
-			 * Run the loop for the search to output the results.
-			 * If you want to overload this in a child theme then include a file
-			 * called content-search.php and that will be used instead.
-			 */
-			get_template_part( 'template-parts/content', 'search' );
+			<header class="page-header">
+				<h1 class="page-title"><?php
+					/* translators: %s: search query. */
+					printf( esc_html__( 'Search Results for: %s', 'tarsasnavigator_s' ), '<span>' . get_search_query() . '</span>' );
+				?></h1>
+			</header><!-- .page-header -->
 
-		endwhile;
+			<?php
+			/* Start the Loop */
+			while ( have_posts() ) : the_post();
 
-		the_posts_navigation();
+				/**
+				 * Run the loop for the search to output the results.
+				 * If you want to overload this in a child theme then include a file
+				 * called content-search.php and that will be used instead.
+				 */
+				get_template_part( 'template-parts/content', 'search' );
 
-	else :
+			endwhile;
 
-		get_template_part( 'template-parts/content', 'none' );
+			the_posts_navigation();
 
-	endif; ?>
+		else :
 
-	</main><!-- #main -->
+			get_template_part( 'template-parts/content', 'none' );
+
+		endif; ?>
+
+		</main><!-- #main -->
+	</section><!-- #primary -->
 
 <?php
 get_sidebar();
