@@ -118,31 +118,6 @@ function tarsasnavigator_s_woocommerce_related_products_args( $args ) {
 }
 add_filter( 'woocommerce_output_related_products_args', 'tarsasnavigator_s_woocommerce_related_products_args' );
 
-if ( ! function_exists( 'tarsasnavigator_s_woocommerce_product_columns_wrapper' ) ) {
-	/**
-	 * Product columns wrapper.
-	 *
-	 * @return  void
-	 */
-	function tarsasnavigator_s_woocommerce_product_columns_wrapper() {
-		$columns = tarsasnavigator_s_woocommerce_loop_columns();
-		echo '<div class="columns-' . absint( $columns ) . '">';
-	}
-}
-add_action( 'woocommerce_before_shop_loop', 'tarsasnavigator_s_woocommerce_product_columns_wrapper', 40 );
-
-if ( ! function_exists( 'tarsasnavigator_s_woocommerce_product_columns_wrapper_close' ) ) {
-	/**
-	 * Product columns wrapper close.
-	 *
-	 * @return  void
-	 */
-	function tarsasnavigator_s_woocommerce_product_columns_wrapper_close() {
-		echo '</div>';
-	}
-}
-add_action( 'woocommerce_after_shop_loop', 'tarsasnavigator_s_woocommerce_product_columns_wrapper_close', 40 );
-
 /**
  * Remove default WooCommerce wrapper.
  */
@@ -159,8 +134,7 @@ if ( ! function_exists( 'tarsasnavigator_s_woocommerce_wrapper_before' ) ) {
 	 */
 	function tarsasnavigator_s_woocommerce_wrapper_before() {
 		?>
-		<div id="primary" class="content-area">
-			<main id="main" class="site-main" role="main">
+			<main id="primary" class="site-main" role="main">
 		<?php
 	}
 }
@@ -177,7 +151,6 @@ if ( ! function_exists( 'tarsasnavigator_s_woocommerce_wrapper_after' ) ) {
 	function tarsasnavigator_s_woocommerce_wrapper_after() {
 		?>
 			</main><!-- #main -->
-		</div><!-- #primary -->
 		<?php
 	}
 }

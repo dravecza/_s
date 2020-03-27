@@ -44,7 +44,7 @@ if ( ! function_exists( 'tarsasnavigator_s_setup' ) ) :
 
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'tarsasnavigator_s' ),
+			'main-menu' => esc_html__( 'Primary', 'tarsasnavigator_s' ),
 		) );
 
 		/*
@@ -74,14 +74,24 @@ if ( ! function_exists( 'tarsasnavigator_s_setup' ) ) :
 		 * @link https://codex.wordpress.org/Theme_Logo
 		 */
 		add_theme_support( 'custom-logo', array(
-			'height'      => 250,
-			'width'       => 250,
+			'height'      => 100,
+			'width'       => 100,
 			'flex-width'  => true,
 			'flex-height' => true,
 		) );
 	}
 endif;
 add_action( 'after_setup_theme', 'tarsasnavigator_s_setup' );
+
+function return_get_template_part($slug, $name=null) {
+
+   ob_start();
+   get_template_part($slug, $name);
+   $content = ob_get_contents();
+   ob_end_clean();
+
+   return $content;
+}
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -110,6 +120,42 @@ function tarsasnavigator_s_widgets_init() {
 		'before_title'  => '<h2 class="widget-title">',
 		'after_title'   => '</h2>',
 	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Footer 1', 'tarsasnavigator_s' ),
+		'id'            => 'footer-1',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title title-font">',
+		'after_title'   => '</h3>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Footer 2', 'tarsasnavigator_s' ),
+		'id'            => 'footer-2',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title title-font">',
+		'after_title'   => '</h3>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Footer 3', 'tarsasnavigator_s' ),
+		'id'            => 'footer-3',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title title-font">',
+		'after_title'   => '</h3>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Product footer', 'tarsasnavigator_s' ),
+		'id'            => 'product-footer',
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h3 class="widget-title title-font">',
+		'after_title'   => '</h3>',
+	) );
 }
 add_action( 'widgets_init', 'tarsasnavigator_s_widgets_init' );
 
@@ -118,6 +164,7 @@ add_action( 'widgets_init', 'tarsasnavigator_s_widgets_init' );
  */
 function tarsasnavigator_s_scripts() {
 	wp_enqueue_style( 'tarsasnavigator-underscores-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'fontawesome', get_template_directory_uri() . '/assets/font-awesome/css/fontawesome-all.min.css' );
 
 	wp_enqueue_script( 'tarsasnavigator-underscores-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
 

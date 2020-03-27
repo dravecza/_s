@@ -46,6 +46,7 @@ html {
 
 body {
 	margin: 0;
+	color: #333;
 }
 
 article,
@@ -252,6 +253,7 @@ th {
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css?family=Alata:400,700&display=swap');
 body,
 button,
 input,
@@ -259,7 +261,7 @@ select,
 optgroup,
 textarea {
 	color: #404040;
-	font-family: sans-serif;
+	font-family: 'Alata', sans-serif;
 	font-size: 16px;
 	font-size: 1rem;
 	line-height: 1.5;
@@ -402,6 +404,7 @@ input[type="submit"] {
 	font-size: 0.75rem;
 	line-height: 1;
 	padding: .6em 1em .4em;
+	transition: all .2s ease-in-out;
 }
 
 button:hover,
@@ -477,15 +480,17 @@ textarea {
 ## Links
 --------------------------------------------------------------*/
 a {
-	color: royalblue;
+	color: #333;
+	text-decoration: none;
+	transition: all .2s ease-in-out;
 }
 
 a:visited {
-	color: purple;
+	color: #333;
 }
 
 a:hover, a:focus, a:active {
-	color: midnightblue;
+	color: rgba(215, 114, 45, 1);
 }
 
 a:focus {
@@ -496,19 +501,143 @@ a:hover, a:active {
 	outline: 0;
 }
 
+p a, p a:visited {
+	color: rgba(215, 114, 45, .9);
+	text-decoration: underline;
+}
+
+/*--------------------------------------------------------------
+## Top banner
+--------------------------------------------------------------*/
+.tn-top-banner {
+	display: flex;
+	justify-content: space-between;
+	max-width: 1500px;
+}
+.tn-top-banner a {
+	max-height: 174px;
+	overflow: hidden;
+}
+.tn-top-banner a img {
+	transition: transform .5s, filter .5s ease-in-out;
+	filter: brightness(1);
+}
+.tn-top-banner a:hover img {
+	transform: scale(1.2) rotate(15deg);
+	filter: brightness(1.2);
+}
+
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
 .main-navigation {
+	position: fixed;
 	display: block;
+	z-index: 9999;
+	top: 0;
+	height: 50px;
 	width: 100%;
+	background-color: #d7722d;
+}
+
+.main-navigation .menu-container {
+	display: grid;
+	grid-template-columns: 1fr 50px 1fr;
+	grid-template-areas: "main-menu logo personal-menu";
+	justify-content: space-between;
+}
+.menu-felso-menu-container {
+	position: fixed;
+	top: 50px;
+}
+.menu-toggle {
+	grid-area: main-menu;
+}
+.menu-logo {
+	grid-area: logo;
+}
+#personal-menu {
+	grid-area: personal-menu;
+	justify-content: flex-end;
 }
 
 .main-navigation ul {
-	display: none;
+	display: flex;
 	list-style: none;
 	margin: 0;
 	padding-left: 0;
+}
+.main-navigation ul.nav-menu {
+	display: none;
+}
+
+.main-navigation ul li a {
+	color: #333333;
+  font-weight: normal;
+  position: relative;
+  padding: 15px 15px 14px;
+  transition: 0.2s all ease;
+  -webkit-transition: 0.2s all ease;
+  -moz-transition: 0.2s all ease;
+  -ms-transition: 0.2s all ease;
+  -o-transition: 0.2s all ease;
+  font-size: 14px;
+	text-transform: uppercase;
+}
+.main-navigation ul li:hover {
+	transition: 0.4s all ease;
+  -webkit-transition: 0.4s all ease;
+  -moz-transition: 0.4s all ease;
+  -ms-transition: 0.4s all ease;
+  -o-transition: 0.4s all ease;
+  -webkit-transition: 0.4s all ease;
+}
+.main-navigation ul li:hover a {
+	background: #f2f2f2;
+  color: #333333;
+}
+.main-navigation ul.menu>li>a:after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  margin-left: 20%;
+  left: 0;
+  bottom: 2px;
+  height: 2px;
+  background: #d7722d;
+  transition: 0.4s all ease 0.2s;
+  -webkit-transition: 0.4s all ease 0.2s;
+  -moz-transition: 0.4s all ease 0.2s;
+  -ms-transition: 0.4s all ease 0.2s;
+  -o-transition: 0.4s all ease 0.2s;
+}
+.main-navigation ul.menu>li:hover>a:after {
+  transform: translateY(-46px);
+  -webkit-transform: translateY(-46px);
+  -moz-transform: translateY(-46px);
+  -ms-transform: translateY(-46px);
+  -o-transform: translateY(-46px);
+  transition: 0.6s all ease;
+  -webkit-transition: 0.6s all ease;
+  -moz-transition: 0.6s all ease;
+  -ms-transition: 0.6s all ease;
+  -o-transition: 0.6s all ease;
+  background: #b05b21;
+  height: 4px;
+}
+.main-navigation ul li ul.sub-menu a, .main-navigation ul li ul.children a {
+  padding: 7px 15px;
+  font-weight: 300;
+  font-size: 11px;
+  background: #f2f2f2;
+  transition: 0.4s background ease, 0.6s padding ease;
+}
+.main-navigation ul li ul.sub-menu a:hover, .main-navigation ul li ul.children a:hover {
+	background: #ebebeb;
+}
+
+.contact {
+	display: none;
 }
 
 .main-navigation ul ul {
@@ -540,13 +669,15 @@ a:hover, a:active {
 	left: auto;
 }
 
-.main-navigation li {
-	position: relative;
-}
-
 .main-navigation a {
 	display: block;
 	text-decoration: none;
+}
+
+.main-navigation .menu-logo {
+  height: 50px;
+	line-height: 1;
+  z-index: 99999;
 }
 
 /* Small menu. */
@@ -555,13 +686,32 @@ a:hover, a:active {
 	display: block;
 }
 
-@media screen and (min-width: 37.5em) {
+@media screen and (min-width: 720px) {
 	.menu-toggle {
 		display: none;
 	}
-	.main-navigation ul {
-		display: flex;
+	.menu-felso-menu-container {
+		grid-area: main-menu;
+		position: relative;
+		top: auto;
 	}
+	.menu-logo {
+		/*margin-left: -250px;*/
+	}
+	.main-navigation ul.nav-menu {
+		display: flex;
+		/*width: 1170px;*/
+	}
+	.contact {
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    left: 0;
+    background-color: rgba(215, 114, 45, .7);
+    display: block;
+    padding: 3px 5px 3px;
+    text-align: center;
+    font-size: 12px;
 }
 
 .site-main .comment-navigation,
@@ -816,4 +966,103 @@ object {
 
 .gallery-caption {
 	display: block;
+}
+
+/*--------------------------------------------------------------
+## Layout
+--------------------------------------------------------------*/
+.site {
+	display: grid;
+	grid-template-columns: auto 20%;
+	grid-template-rows: 80px auto;
+	grid-template-areas:
+		"header header"
+		"main sidebar"
+		"footer footer";
+}
+.site-header {
+	grid-area: header;
+}
+.site-main {
+	grid-area: main;
+	overflow: hidden; /* Resolves issue with <pre> elements forcing full width. */
+}
+.widget-area {
+	grid-area: sidebar;
+	max-width: 350px;
+}
+.site-footer {
+	grid-area: footer;
+	display: grid;
+	grid-template-columns: repeat(3, 30%);
+	grid-template-rows: auto auto;
+	grid-template-areas:
+		"footer-1 footer-2 footer-3"
+		"copyright copyright copyright";
+	justify-content: space-between;
+}
+.site-footer .footer-column {
+	margin: auto 10%;
+}
+.site-footer .widget {
+	font-size: 13px;
+  padding: 15px;
+  margin-top: 25px;
+  border-radius: 5px;
+}
+.site-info {
+	grid-area: copyright;
+	text-align: center;
+	padding: 15px 10px;
+	font-size: .9rem;
+}
+
+/*--------------------------------------------------------------
+## Product Catalog
+--------------------------------------------------------------*/
+
+
+.woocommerce ul.products li.product .onsale {
+    position: absolute;
+    top: 15px;
+    right: 3px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #d7722d;
+    padding: 5px 10px 6px;
+    border: 3px solid #d7722d;
+    border-radius: 9px;
+    transform: rotate(30deg);
+    text-transform: uppercase;
+    font-size: 12pt;
+    z-index: 99;
+}
+.woocommerce div.product > span.onsale .countdown-timer.days-remaining {
+	font-size: 10pt;
+}
+.woocommerce ul.products li.product.sale {
+	box-shadow: 0 0 5px #d7722d;
+}
+
+/*------------------------------------------------------
+## Footer
+-------------------------------------------------------*/
+footer.site-footer .widget ul li {
+	list-style: none;
+	padding: 5px;
+}
+
+
+/*------------------------------------------------------
+## COLORS
+-------------------------------------------------------*/
+.site-footer {
+	background-color: #fafafa;
+}
+.site-footer .widget {
+	border-color: #ccc;
+	background: #fff;
+}
+.site-info {
+	background-color: #b05b21;
+	color: #f5f5f5;
 }
