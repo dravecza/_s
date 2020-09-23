@@ -19,6 +19,9 @@ WooCommerce styles override
 main.site-main {
 	padding: 0 10px 0;
 }
+.single-product main.site-main {
+	padding: 0 2vw 0;
+}
 table.shop_table_responsive thead {
 	display: none;
 }
@@ -88,7 +91,7 @@ main.site-main p.woocommerce-result-count {
 	float: left;
 	margin: .5rem;
 }
-main.site-main form {
+main.site-main form.woocommerce-ordering {
 	float: right;
 	margin-top: .2rem;
 }
@@ -111,9 +114,6 @@ main.site-main div:last-child {
 	font-weight: 700;
 	border-radius: 3px;
 	left: auto;
-	color: #fff;
-	background-color: transparent;
-	border: 0;
 	white-space: nowrap;
 	display: inline-block;
 	background-image: none;
@@ -133,7 +133,6 @@ main.site-main div:last-child {
   overflow: hidden;
   z-index: 1;
 	padding-left: 3.1em;
-	color: #fff;
 	border-width: 3px;
 	border-style: solid;;
 	font-weight: normal;
@@ -162,7 +161,6 @@ main.site-main div:last-child {
   content: '\f07a';
   left: 0;
 	z-index: -2;
-	color: #fff;
 	padding-left: .5em;
 }
 .woocommerce .button.checkout.wc-forward::before {
@@ -214,6 +212,19 @@ form.woocommerce-product-search {
 	opacity: .9;
 	/*transform: rotate3d(0, 1, 0, 180deg);*/
 }
+.dgwt-wcas-search-icon {
+	padding: 38px 20px 12px;
+}
+.dgwt-wcas-layout-icon-open .dgwt-wcas-search-icon-arrow {
+	left: 12px;
+}
+
+.main-navigation ul li.wpmenucartli a {
+	padding-top: 8px;
+}
+.main-navigation ul li.wpmenucartli a i {
+	font-size: 1.4em;
+}
 
 /* CART */
 .woocommerce-mini-cart__buttons.buttons {
@@ -221,6 +232,46 @@ form.woocommerce-product-search {
 	grid-template-columns: 1fr 1fr;
 	justify-content: space-between;
 	grid-gap: 0 5px;
+}
+.woocommerce-mini-cart__buttons.buttons .button {
+	min-width: 130px;
+}
+@media screen and (max-width: 1599px) {
+	.woocommerce-mini-cart__buttons.buttons .button {
+		padding-right: .33em;
+	}
+	.woocommerce-mini-cart__buttons.buttons .button:before {
+		width: 100%;
+	}
+	.woocommerce-mini-cart__buttons.buttons .button:after {
+		content: '';
+	}
+}
+@media screen and (max-width: 1365px) {
+	.woocommerce-mini-cart__buttons.buttons {
+		grid-template-columns: 1fr;
+		grid-gap: 5px;
+	}
+	.woocommerce-mini-cart__buttons.buttons .button {
+		padding-right: .66em;
+	}
+	.woocommerce-mini-cart__buttons.buttons .button:before {
+		width: calc(100% - 2.25em);;
+	}
+	.woocommerce-mini-cart__buttons.buttons .button:after {
+		content: '\f054';
+	}
+}
+@media screen and (max-width: 800px) {
+	.woocommerce-mini-cart__buttons.buttons .button {
+		padding-right: .33em;
+	}
+	.woocommerce-mini-cart__buttons.buttons .button:before {
+		width: 100%;
+	}
+	.woocommerce-mini-cart__buttons.buttons .button:after {
+		content: '';
+	}
 }
 ul.woocommerce-mini-cart li.mini_cart_item {
 	display: grid;
@@ -263,21 +314,32 @@ a.remove.remove_from_cart_button:hover {
 * Filters
 */
 .berocket_single_filter_widget h3 {
+	font-size: 1.1em;
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+.widget h2 {
 	font-size: 1.3em;
+}
+.bapf_sfilter {
+	margin-bottom: 5px;
+}
+.berocket_single_filter_widget ul {
+	padding-left: 0;
 }
 .berocket_single_filter_widget li label {
 	margin-left: 5px;
 	font-size: .9rem;
 }
 
-.woocommerce .berocket_aapf_widget input[type="button"] {
+.woocommerce .berocket_aapf_widget input[type="button"],
+.woocommerce .berocket_single_filter_widget button {
   display: inline-block;
   border-radius: 5px;
   letter-spacing: .07rem;
   transition: all .3s;
 	padding: .5em .6em .51em;
   font-size: .9rem;
-  font-weight: bold;
 }
 
 /**
@@ -290,14 +352,40 @@ ul.products {
 	padding: 0;
 	justify-content: space-evenly;
 	grid-template-columns: repeat( auto-fit, 270px );
-	max-width: 1500px;
+	max-width: 1670px;
 	clear: both;
+}
+/* Product page product cards */
+.product ul.products {
+	grid-template-columns: repeat( auto-fit, 250px );
+}
+.product ul.products li.product a .tn-product-thumbnail {
+	height: 218px
+}
+.product ul.products li.product a .tn-product-thumbnail .game-info-icons {
+	font-size: 9pt;
+}
+/* Sidebar product cards */
+#secondary ul.products {
+	grid-template-columns: repeat( auto-fit, 205px );
+}
+#secondary ul.products li.product a .tn-product-thumbnail {
+	grid-template-rows: 35px auto 42px;
+	height: 173px;
+}
+#secondary ul.products li.product a .tn-product-thumbnail .game-info-icons {
+	font-size: 7.5pt;
 }
 
 ul.products li.product {
 	list-style: none;
 	position: relative;
 	margin-bottom: 2em;
+	transition: all .1s ease-in-out;
+	opacity: 1;
+}
+ul.products li.product .tn-p-wrapper {
+	position: relative;
   text-align: center;
 	display: grid;
 	grid-template-columns: 52px repeat(3, 1fr) 52px;
@@ -307,13 +395,23 @@ ul.products li.product {
 		"title title title title title"
 		"buy price price price wishlist";
 	width: calc(100% - 20px);
+	height: 100%;
 	transition: all .1s ease-in-out;
-	opacity: 1;
 	padding-bottom: 5px;
 }
+.product ul.products li.product .tn-p-wrapper {
+	grid-template-rows: [image] 210px [title] auto [buttons] auto;
+}
+#secondary ul.products li.product .tn-p-wrapper {
+	grid-template-rows: [image] 162px [title] auto [buttons] auto;
+}
+
 ul.products li.product:hover {
 	transform: scale(1.02);
 	opacity: .9;
+}
+ul.products li.product a {
+	transition: none;
 }
 
 ul.products li.product .woocommerce-loop-product__link {
@@ -360,11 +458,17 @@ ul.products li.product .tinvwl_add_to_wishlist_button {
 	width: 1em;
 	vertical-align: inherit;
 }
-.woocommerce div.product button.single_add_to_cart_button, .woocommerce ul.products li.product a.button.product_type_simple, ul.products li.product .tinvwl-loop-button-wrapper a {
+.woocommerce div.product button.single_add_to_cart_button {
+	font-size: 1.1em;
+	margin: auto auto auto 0;
+	padding: .6em 1.2em;
+	text-transform: uppercase;
+}
+.woocommerce ul.products li.product a.button.product_type_simple, ul.products li.product .tinvwl-loop-button-wrapper a {
 	background-color: transparent;
-	font-size: 22pt;
-	margin: auto auto auto 12px;
 	padding: 0;
+	font-size: 22pt;
+	margin: auto;
 }
 .woocommerce div.product button.single_add_to_cart_button:hover, ul.products li.product .button.product_type_simple:hover, ul.products li.product .tinvwl-loop-button-wrapper a:hover {
 	opacity: .7;
@@ -435,6 +539,7 @@ ul.products li.product a .tn-product-thumbnail img.product-language {
 .game-info-icons .tn-difficulty {
 	grid-area: difficulty;
 	text-align: left;
+	white-space: nowrap;
 }
 .game-info-icons .tn-age-icon {
 	grid-area: ageIcon;
@@ -450,7 +555,7 @@ ul.products li.product .button {
 	display: block;
 }
 
-@media screen and (max-width: 360px) {
+/* @media screen and (min-width: 360px) {
 	ul.products {
 		grid-template-columns: repeat( auto-fit, 180px );
 	}
@@ -483,7 +588,7 @@ ul.products li.product .button {
 	.game-info-icons .tn-difficulty {
 		text-align: left;
 	}
-}
+} */
 
 
 /* Paging */
@@ -509,14 +614,6 @@ ul.products li.product .button {
 .woocommerce-pagination .page-numbers span {
 	cursor: default;
 }
-.woocommerce-pagination .page-numbers span.current {
-	border-color: #d7722d;
-	color: #d7722d;
-}
-.woocommerce-pagination .page-numbers li a:hover {
-	background-color: #d7722d;
-	color: #fff;
-}
 
 /**
  * Single product
@@ -524,10 +621,12 @@ ul.products li.product .button {
 /**
  * Single Product
  */
+ @media screen and (min-width: 768px) {
+
+ }
+
 .single-product div.product {
 	content: "";
-	display: table;
-	table-layout: fixed;
 	position: relative;
 }
 
@@ -719,7 +818,6 @@ ul.products li.product .button {
 	top: 0;
 	position: absolute;
 	left: 0;
-	color: royalblue;
 }
 
 p.stars a {
@@ -756,13 +854,11 @@ p.stars a:hover ~ a:before {
 
 p.stars:hover a:before {
 	content: "\53";
-	color: royalblue;
 	opacity: 1;
 }
 
 p.stars.selected a.active:before {
 	content: "\53";
-	color: royalblue;
 	opacity: 1;
 }
 
@@ -774,7 +870,6 @@ p.stars.selected a.active ~ a:before {
 
 p.stars.selected a:not(.active):before {
 	content: "\53";
-	color: royalblue;
 	opacity: 1;
 }
 
@@ -839,6 +934,7 @@ p.stars.selected a:not(.active):before {
 
 .required {
 	color: red;
+	font-size: .8em;
 }
 
 /**
@@ -852,18 +948,10 @@ p.no-comments {
 	content: "";
 	display: table;
 	table-layout: fixed;
-	background-color: #0f834d;
 	clear: both;
-}
-
-.woocommerce-info,
-.woocommerce-noreviews,
-p.no-comments {
-	background-color: #3D9CD2;
-}
-
-.woocommerce-error {
-	background-color: #e2401c;
+	list-style: none;
+	font-weight: bold;
+	width: 100%;
 }
 
 .demo_store {

@@ -29,11 +29,11 @@ global $post, $product;
 		$sale_price = get_post_meta( get_the_ID(), '_sale_price', true);
 		$sale_percent = floor(100 - ($sale_price / $regular_price * 100));
 		echo apply_filters( 'woocommerce_sale_flash',
-			'<span class="onsale shake animation-5s sheen">' .
-				($sale_percent > 10 ? "-" . $sale_percent . "%" : esc_html__( 'Sale!', 'woocommerce' )) .
+			'<span class="onsale' . ($sale_percent > 10 ? " bigsale" : "") . '"><span>' .
+				($sale_percent > 10 ? "-" . $sale_percent . "%" : "%") .
 				'<br />' .
 				'<span class="countdown-timer" data-cd-end="' . $product->get_date_on_sale_to(). '"></span>' .
-			'</span>', $post, $product ); ?>
+			'</span></span>', $post, $product ); ?>
 	<?php if ( $product->get_date_on_sale_to() ) : ?>
 
 		<script type="text/javascript">

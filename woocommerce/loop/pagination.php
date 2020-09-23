@@ -39,8 +39,8 @@ if ( $total <= 1 ) {
 			'prev_text'    =>  __( '<i class="fas fa-chevron-left"></i>', 'textdomain' ),
 			'next_text'    => __( '<i class="fas fa-chevron-right"></i>', 'textdomain' ),
 			'type'         => 'list',
-			'end_size'     => 3,
-			'mid_size'     => 3,
+			'end_size'     => 1,
+			'mid_size'     => 0,
 		) ) );
 	?>
 </nav>

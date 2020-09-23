@@ -31,6 +31,12 @@ function tarsasnavigator_s_pingback_header() {
 }
 add_action( 'wp_head', 'tarsasnavigator_s_pingback_header' );
 
+// Overriding magnifying glass icon for AJAX Search wor WooCommerce plugin with
+// fa-search for consistent look
+add_filter( 'dgwt/wcas/form/magnifier_ico', function ( $html ) {
+    $html = '<i class="fa fa-search dgwt-wcas-ico-magnifier"></i>';
+    return $html;
+} );
 
 // Overriding the original loop-product thumbnail
 add_action('init', 'replace_default_loop_product_thumbnail');
@@ -77,6 +83,9 @@ function replace_default_loop_product() {
 	remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 	remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
 	add_action( 'woocommerce_after_shop_loop_item_title', 'tn_after_shop_loop_item_title', 10);
+	// Main item wrapper
+	//remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
+	add_action( 'woocommerce_after_shop_loop_item', 'tn_template_loop_product_link_close', 10);
 
 	//////// Hook functions
 	// BEFORE the whole shop loop item
@@ -94,6 +103,7 @@ function replace_default_loop_product() {
 			$style .= ')"';
 
       $link = apply_filters( 'woocommerce_loop_product_link', get_the_permalink(), $product );
+			echo '<div class="tn-p-wrapper">';
       echo '<a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
 			echo '<div class="tn-product-thumbnail" ' . $style . '>';
 				tn_display_product_language();
@@ -130,6 +140,7 @@ function replace_default_loop_product() {
 			echo '<a href="' . esc_url( $link ) . '" class="woocommerce-LoopProduct-link price-wrapper">';
 			wc_get_template( 'loop/price.php' );
 			echo '</a>';
+
 		}
 	}
 
@@ -192,4 +203,12 @@ function replace_default_loop_product() {
 			}
 		}
 	}
+
+	// Product item wrapper close
+	if ( ! function_exists( 'tn_template_loop_product_link_close' ) ) {
+		function tn_template_loop_product_link_close() {
+			echo '</div>';
+		}
+	}
+
 }
